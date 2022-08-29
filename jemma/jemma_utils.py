@@ -56,14 +56,14 @@ properties_label = {
 
 def get_project_id(project_name):
     """
-    Returns the project_id of the project.
+    Returns the project id of the project (queried by project name).
 
     Parameters:
     * project_name: (str) - name of the project
 
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
-    * Returns None if no project_id was found
+    * Returns None if no such project_id was found
     * Returns None if multiple projects were found with the same name
     """
 
@@ -77,14 +77,14 @@ def get_project_id(project_name):
 
 def get_project_id_by_path(project_path):
     """
-    Returns the project_id of the project (queried with project_path).
+    Returns the project id of the project (queried with project path).
 
     Parameters:
     * project_path: (str) - path of the project defined in jemma
 
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
-    * Returns None if no project_id was found
+    * Returns None if no such project_id was found
     * Returns None if multiple projects were found with the same name
     """
 
@@ -97,6 +97,15 @@ def get_project_id_by_path(project_path):
 
 def get_project_id_class_id(class_id):
     """
+    Returns the project id of the project (queried with class id)
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding project (project_id)
+    * Returns None if no such project_id was found
+    * Returns None if multiple projects were found with the same name    
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -109,6 +118,15 @@ def get_project_id_class_id(class_id):
 
 def get_project_id_by_method_id(method_id):
     """
+    Returns the project id of the project (queried with method id)
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding project (project_id)
+    * Returns None if no such project_id was found
+    * Returns None if multiple projects were found with the same name    
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -120,6 +138,14 @@ def get_project_id_by_method_id(method_id):
 
 def get_project_name(project_id):
     """
+    Returns the project name of the project.
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding project name
+    * Returns None if no such project_id is defined in jemma
     """
 
     df = pd.read_csv(projects_csv, header=0)
@@ -132,6 +158,14 @@ def get_project_name(project_id):
 
 def get_project_path(project_id):
     """
+    Returns the project path of the project.
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding project name
+    * Returns None if no such project_id is defined in jemma
     """
 
     df = pd.read_csv(projects_csv, header=0)
@@ -143,6 +177,14 @@ def get_project_path(project_id):
 
 def get_project_size_by_classes(project_id):
     """
+    Returns the size of a project, by the number of classes. 
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding project size, by the number of classes
+    * Returns None if no such project_id is defined in jemma
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -151,6 +193,14 @@ def get_project_size_by_classes(project_id):
 
 def get_project_size_by_methods(project_id):
     """
+    Returns the size of a project, by the number of methods. 
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding project size, by the number of methods
+    * Returns None if no such project_id is defined in jemma
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -159,6 +209,14 @@ def get_project_size_by_methods(project_id):
 
 def get_project_class_ids(project_id):    
     """
+    Returns all class ids defined within the project.
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all class ids in the project   
+    * Returns an empty List if no classes are found
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -167,6 +225,14 @@ def get_project_class_ids(project_id):
 
 def get_project_method_ids(project_id):
     """
+    Returns all method ids defined within the project.
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all method ids in the project   
+    * Returns an empty List if no methods are found
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -175,6 +241,14 @@ def get_project_method_ids(project_id):
 
 def get_project_class_names(project_id):    
     """
+    Returns all class names defined within the project.
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all class names in the project   
+    * Returns an empty List if no classes are found
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -183,12 +257,39 @@ def get_project_class_names(project_id):
 
 def get_project_method_names(project_id):
     """
+    Returns all method names defined within the project.
+
+    Parameters:
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all method names in the project   
+    * Returns an empty List if no methods are found
     """
 
     df = pd.read_csv(methods_csv, header=0)
     df = df[df['project_id'] == project_id.strip()]
     return df['method_name'].tolist()
                 
+def get_project_metadata(project_id):
+    """
+    Returns all metadata related to a particular project.
+
+    Parameters: 
+    * project_id: (str) - any project_id defined within jemma
+
+    Returns:
+    * Returns a dictionary of project metadata values
+    * Returns None if no such project_id is defined in jemma
+    """
+
+    df = pd.read_csv(projects_csv, header=0)
+    df = df[df['project_id'] == project_id]
+
+    if df.shape[0] == 1:
+        return df.iloc[0].to_dict()
+    return None    
+
 
 # *************** #
 #     classes     #
@@ -197,6 +298,16 @@ def get_project_method_names(project_id):
 
 def get_class_id(project_id, class_name):
     """
+    Returns the class id of a class in project (queried by class name).
+
+    Parameters:
+    * project_id: (str) - project_id of a project
+    * class_name: (str) - class name of a class within the project
+
+    Returns:
+    * Returns a str uuid of the corresponding class (class_id)
+    * Returns None if no such project_id or class_name was found
+    * Returns None if multiple classes were found with the same name (use: get_class_id_by_path)
     """
     
     df = pd.read_csv(classes_csv, header=0)
@@ -279,8 +390,24 @@ def get_class_method_names(class_id):
     df = df[df['class_id'] == class_id.strip()]
     return df['method_name'].tolist()    
 
+def get_class_metadata(class_id):
+    """
+    Returns all metadata related to a particular class.
 
+    Parameters: 
+    * class_id: (str) - any class_id defined within jemma
 
+    Returns:
+    * Returns a dictionary of class metadata values
+    * Returns None if no such class_id is defined in jemma
+    """
+
+    df = pd.read_csv(classes_csv, header=0)
+    df = df[df['class_id'] == class_id]
+
+    if df.shape[0] == 1:
+        return df.iloc[0].to_dict()
+    return None    
 
 # *************** #
 #     methods     #
@@ -331,6 +458,25 @@ def get_end_line(method_id):
     if df.shape[0] == 1:
         return df.iloc[0]['end_line']
     return None
+
+def get_method_metadata(method_id):
+    """
+    Returns all metadata related to a particular method.
+
+    Parameters: 
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a dictionary of method metadata values
+    * Returns None if no such method_id is defined in jemma
+    """
+
+    df = pd.read_csv(methods_csv, header=0)
+    df = df[df['method_id'] == method_id]
+
+    if df.shape[0] == 1:
+        return df.iloc[0].to_dict()
+    return None    
 
 # *************** #
 #      utils      #
