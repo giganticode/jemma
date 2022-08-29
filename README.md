@@ -41,8 +41,8 @@
 
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
-    * Returns None if no such project_id was found
-    * Returns None if multiple projects were found with the same name
+    * Returns None if no such project_path was found
+    * Returns None if multiple projects were found with the same path
     
 
 ---
@@ -57,7 +57,6 @@
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
     * Returns None if no such project_id was found
-    * Returns None if multiple projects were found with the same name    
     
 
 ---
@@ -72,7 +71,6 @@
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
     * Returns None if no such project_id was found
-    * Returns None if multiple projects were found with the same name    
     
 
 --- 
@@ -99,7 +97,7 @@
     * project_id: (str) - any project_id defined within jemma
 
     Returns:
-    * Returns a str of the corresponding project name
+    * Returns a str of the corresponding project path
     * Returns None if no such project_id is defined in jemma
     
 
@@ -223,58 +221,136 @@
 
 ---
 
+- *get_class_id_by_path*
+    
+    ```Returns the class id of a class (queried with class path).```
 
-get_class_id_by_path
+    Parameters:
+    * class_path: (str) - path of the class defined in jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding class (class_id)
+    * Returns None if no such class_path was found
+    * Returns None if multiple classes were found with the same path
+    
+---
+
+- *get_class_id_by_method_id*
+    
+    ```Returns the class id of a class (queried with method id)```
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding class (class_id)
+    * Returns None if no such class_id was found
+    """
 
 ---
 
-get_class_id_by_method_id
+- *get_class_name*
+    
+    ```Returns the class name of a particular class.```
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding class name
+    * Returns None if no such class_id is defined in jemma
+    
+---
+
+- *get_class_path*
+    
+    ```Returns the class path of a particular class.```
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding project path
+    * Returns None if no such class_id is defined in jemma
+    
 
 ---
 
-get_class_name
+- *get_class_size_by_methods*
+    
+    ```Returns the size of a class, by the number of methods.```
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding class size, by the number of methods
+    * Returns None if no such class_id is defined in jemma
+    
 
 ---
 
-get_class_path
+- *get_class_method_ids*
+    
+    ```Returns all method ids defined within a particular class.```
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all method ids in the class   
+    * Returns an empty List if no methods are found
+    
 
 ---
 
-get_class_size_by_methods
+- *get_class_method_names*
+    
+    ```Returns all method names within a particular class.```
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all method names in the class   
+    * Returns an empty List if no methods are found
+    
 
 ---
 
-get_class_method_ids
+- *get_class_metadata*
+    
+    ```Returns all metadata related to a particular class.```
 
----
+    Parameters: 
+    * class_id: (str) - any class_id defined within jemma
 
-get_class_method_names
-
----
-
-get_class_metadata
+    Returns:
+    * Returns a dictionary of class metadata values
+    * Returns None if no such class_id is defined in jemma
+    
 
 ---
 
 
 ##    *methods*    #<br/>
 
-get_method_id
+- *get_method_id*
 
 ---
 
-get_method_path
+- *get_method_path*
 
 ---
 
-get_start_line
+- *get_start_line*
 
 ---
 
-get_end_line
+- *get_end_line*
 
 ---
 
-get_method_metadata
+- *get_method_metadata*
 
 ---

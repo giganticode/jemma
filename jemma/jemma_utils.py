@@ -84,8 +84,8 @@ def get_project_id_by_path(project_path):
 
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
-    * Returns None if no such project_id was found
-    * Returns None if multiple projects were found with the same name
+    * Returns None if no such project_path was found
+    * Returns None if multiple projects were found with the same path
     """
 
     df = pd.read_csv(projects_csv, header=0)
@@ -104,8 +104,7 @@ def get_project_id_class_id(class_id):
 
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
-    * Returns None if no such project_id was found
-    * Returns None if multiple projects were found with the same name    
+    * Returns None if no such project_id was found 
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -126,7 +125,6 @@ def get_project_id_by_method_id(method_id):
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
     * Returns None if no such project_id was found
-    * Returns None if multiple projects were found with the same name    
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -164,7 +162,7 @@ def get_project_path(project_id):
     * project_id: (str) - any project_id defined within jemma
 
     Returns:
-    * Returns a str of the corresponding project name
+    * Returns a str of the corresponding project path
     * Returns None if no such project_id is defined in jemma
     """
 
@@ -320,6 +318,15 @@ def get_class_id(project_id, class_name):
 
 def get_class_id_by_path(class_path):
     """
+    Returns the class id of a class (queried with class path).
+
+    Parameters:
+    * class_path: (str) - path of the class defined in jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding class (class_id)
+    * Returns None if no such class_path was found
+    * Returns None if multiple classes were found with the same path
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -332,6 +339,14 @@ def get_class_id_by_path(class_path):
 
 def get_class_id_by_method_id(method_id):
     """
+    Returns the class id of a class (queried with method id)
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding class (class_id)
+    * Returns None if no such class_id was found
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -344,6 +359,14 @@ def get_class_id_by_method_id(method_id):
 
 def get_class_name(class_id):
     """
+    Returns the class name of a particular class.
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding class name
+    * Returns None if no such class_id is defined in jemma
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -356,6 +379,14 @@ def get_class_name(class_id):
 
 def get_class_path(class_id):
     """
+    Returns the class path of a particular class.
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding project path
+    * Returns None if no such class_id is defined in jemma
     """
 
     df = pd.read_csv(classes_csv, header=0)
@@ -368,6 +399,14 @@ def get_class_path(class_id):
 
 def get_class_size_by_methods(class_id):
     """
+    Returns the size of a class, by the number of methods. 
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding class size, by the number of methods
+    * Returns None if no such class_id is defined in jemma
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -376,6 +415,14 @@ def get_class_size_by_methods(class_id):
 
 def get_class_method_ids(class_id):
     """
+    Returns all method ids defined within a particular class.
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all method ids in the class   
+    * Returns an empty List if no methods are found
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -384,6 +431,14 @@ def get_class_method_ids(class_id):
 
 def get_class_method_names(class_id):
     """
+    Returns all method names within a particular class.
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) corresponding to all method names in the class   
+    * Returns an empty List if no methods are found
     """
 
     df = pd.read_csv(methods_csv, header=0)
