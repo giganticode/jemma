@@ -59,7 +59,7 @@ def get_project_id(project_name):
     Returns the project_id of the project.
 
     Parameters:
-    * project_name : str - name of the project
+    * project_name: (str) - name of the project
 
     Returns:
     * Returns a str uuid of the corresponding project (project_id)
@@ -77,6 +77,15 @@ def get_project_id(project_name):
 
 def get_project_id_by_path(project_path):
     """
+    Returns the project_id of the project (queried with project_path).
+
+    Parameters:
+    * project_path: (str) - path of the project defined in jemma
+
+    Returns:
+    * Returns a str uuid of the corresponding project (project_id)
+    * Returns None if no project_id was found
+    * Returns None if multiple projects were found with the same name
     """
 
     df = pd.read_csv(projects_csv, header=0)
