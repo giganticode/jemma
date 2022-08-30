@@ -15,11 +15,11 @@
 
 - Working with JEMMA Workbench
     - List of API Calls
-        - [projects](##projects)
-        - [classes](##classes)
-        - [methods](##methods) 
-        - [basic utils](##basic-utils) 
-        - [task utils](##task-utils)
+        - [projects](#projects)
+        - [classes](#classes)
+        - [methods](#methods) 
+        - [basic utils](#basic-utils) 
+        - [task utils](#task-utils)
     - Use-Case Tutorials
 
 
