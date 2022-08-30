@@ -97,7 +97,7 @@ def get_project_id_by_path(project_path):
 
 def get_project_id_class_id(class_id):
     """
-    Returns the project id of the project (queried with class id)
+    Returns the project id of the project (queried with class id).
 
     Parameters:
     * class_id: (str) - any class_id defined within jemma
@@ -117,7 +117,7 @@ def get_project_id_class_id(class_id):
 
 def get_project_id_by_method_id(method_id):
     """
-    Returns the project id of the project (queried with method id)
+    Returns the project id of the project (queried with method id).
 
     Parameters:
     * method_id: (str) - any method_id defined within jemma
@@ -339,7 +339,7 @@ def get_class_id_by_path(class_path):
 
 def get_class_id_by_method_id(method_id):
     """
-    Returns the class id of a class (queried with method id)
+    Returns the class id of a class (queried with method id).
 
     Parameters:
     * method_id: (str) - any method_id defined within jemma
@@ -385,7 +385,7 @@ def get_class_path(class_id):
     * class_id: (str) - any class_id defined within jemma
 
     Returns:
-    * Returns a str of the corresponding project path
+    * Returns a str of the corresponding class path
     * Returns None if no such class_id is defined in jemma
     """
 
@@ -471,6 +471,16 @@ def get_class_metadata(class_id):
 
 def get_method_id(class_id, method_name):
     """
+    Returns the method id of a method in a class (queried by method name).
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+    * method_name: (str) - method name of a method within the class
+
+    Returns:
+    * Returns a str uuid of the corresponding method (method_id)
+    * Returns None if no such class_id or method_name was found
+    * Returns None if multiple methods were found with the same name (use: get_method_id_stln_enln)
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -480,9 +490,40 @@ def get_method_id(class_id, method_name):
         return df.iloc[0]['method_id']
     return None
 
+def get_method_id_by_stln_enln(class_id, method_name, stln, enln):
+    """
+    Returns the method id of a method in a class (queried by method name, start line, and end line).
+
+    Parameters:
+    * class_id: (str) - any class_id defined within jemma
+    * method_name: (str) - method name of a method within the class
+    * stln: (str) - start line of the method within the class
+    * enln: (str) - end line of the method within the class
+
+    Returns:
+    * Returns a str uuid of the corresponding method (method_id)
+    * Returns None if no such class_id or method_name was found
+    """    
+
+    df = pd.read_csv(methods_csv, header=0)
+    df = df[(df['class_id'] == class_id.strip()) & (df['method_name'] == method_name.strip())]
+    df = df[(df['start_line'] == stln.strip()) & (df['end_line'] == enln.strip())]
+
+    if df.shape[0] == 1:
+        return df.iloc[0]['method_id']
+    return None
+
 
 def get_method_path(method_id):
     """
+    Returns the class path of the parent class of a method.
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding class path
+    * Returns None if no such method_id is defined in jemma
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -494,6 +535,14 @@ def get_method_path(method_id):
 
 def get_start_line(method_id):
     """
+    Returns the start line of a particular method.
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding start line of the method
+    * Returns None if no such method_id is defined in jemma
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -505,6 +554,14 @@ def get_start_line(method_id):
 
 def get_end_line(method_id):
     """
+    Returns the end line of a particular method.
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a str of the corresponding end line of the method
+    * Returns None if no such method_id is defined in jemma
     """
 
     df = pd.read_csv(methods_csv, header=0)
@@ -533,6 +590,8 @@ def get_method_metadata(method_id):
         return df.iloc[0].to_dict()
     return None    
 
+
+
 # *************** #
 #      utils      #
 # *************** #
@@ -540,14 +599,14 @@ def get_method_metadata(method_id):
 
 def get_properties(property, methods):
     """
-    Get property values of a list of methods 
+    Get property values for a list of methods.
 
     Parameters:
     * property : (str) - property code
     * methods : (list[str]) - list of unique methods ids
 
     Returns:
-    * pd.Dataframe object (with method_id, property) of the passed list of methods
+    * pandas Dataframe object (with method_id, property) of the passed list of methods
     """
 
     df_m = pd.DataFrame({'method_id': methods})
@@ -556,8 +615,22 @@ def get_properties(property, methods):
 
     return df_f
 
-def get_balanced_properties(property):
+def get_balanced_properties(property, methods):
+    """
+    Get balanced property values for a list of methods.
+
+    Parameters:
+    * property : (str) - property code
+    * methods : (list[str]) - list of unique methods ids [OPTIONAL]
+
+    Returns:
+    * pandas Dataframe object (with method_id, property) of the passed list of methods
+    """
+
     df_p = pd.read_csv(properties.get(property, None), header=0)
+
+    if methods:
+        df_p = df_p[df_p["method_id"].isin(methods)]
 
     lbls = list(set(df_p[properties_label.get(property, None)].tolist()))
     minc = min([len(df_p[properties_label.get(property, None) == lbl].tolist()) for lbl in lbls])
@@ -570,14 +643,14 @@ def get_balanced_properties(property):
 
 def get_representations(representation, methods):
     """
-    Get representation values of a list of methods
+    Get representation values of a list of methods.
 
     Parameters:
     * representation : (str) - representation code
     * methods : (list[str]) - list of unique methods ids
 
     Returns:
-    * pd.Dataframe object (with method_id, representation) of the passed list of methods
+    * pandas Dataframe object (with method_id, representation) of the passed list of methods
     """
 
     df_m = pd.DataFrame({'method_id': methods})
@@ -590,6 +663,14 @@ def get_representations(representation, methods):
 
 def get_callees(method_id):
     """
+    Get a list of method ids for direct callees of a particular method.
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) of method ids for direct callees
+    * Returns an empty List if no such method_id exists
     """
 
     project_id = get_project_id_by_method_id(method_id)
@@ -603,6 +684,14 @@ def get_callees(method_id):
 
 def get_callers(method_id):
     """
+    Get a list of method ids for direct callers of a particular method.
+
+    Parameters:
+    * method_id: (str) - any method_id defined within jemma
+
+    Returns:
+    * Returns a (List[str]) of method ids for direct callers
+    * Returns an empty List if no such method_id exists
     """
 
     project_id = get_project_id_by_method_id(method_id)
@@ -614,6 +703,8 @@ def get_callers(method_id):
     callers = df["caller_method_id"].tolist()
     return list(set(callers))
 
+
+
 def get_caller_context(method_id, n_neighborhood):
     pass 
 
@@ -622,6 +713,7 @@ def get_callee_context(method_id, n_neighborhood):
 
 
 
+# ************************************************************************************
 
 # def is_valid(mid):
 #     try:
