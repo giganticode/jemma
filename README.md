@@ -5,18 +5,73 @@
 
 #### Contents
 
-- List of API Calls
-- Tutorials
 
+- [Setup Instructions](####Setup-Instructions)
+- [Getting to know JEMMA Datasets](###Getting-to-know-JEMMA-Datasets)
+    - JEMMA Metadata
+    - JEMMA Representations
+    - JEMMA Properties
+    - JEMMA Callgraphs
+
+- Working with JEMMA Workbench
+    - List of API Calls
+        - [projects](##projects)
+        - [classes](##classes)
+        - [methods](##methods) 
+        - [basic utils](##basic-utils) 
+        - [task utils](##task-utils)
+    - Use-Case Tutorials
 
 
 ---
-#### Exhaustive List of JEMMA API calls
+
+
+#### Setup Instructions
+
+Getting started with jemma
+
+
+---
+
+
+### Getting to know JEMMA Datasets
+
+#### JEMMA Metadata
+
+---
+
+#### JEMMA Representations
+
+Table 
+
+Representation Name --- Representation Code --- Link to dataset
+
+
+---
+
+#### JEMMA Properties
+
+Table 
+
+Property Name --- Property Code --- Link to dataset
+
+---
+
+#### JEMMA Callgraphs
+
+
+---
+
+### Working with JEMMA Workbench
+
+
+
+#### List of JEMMA API calls
 ---
 
 
 
-##    *projects*    #<br/>
+## *projects* 
 
 - *get_project_id* 
     
@@ -203,7 +258,7 @@
 ---
 
 
-##    *classes*    #<br/>
+## *classes*
 
 - *get_class_id*
     
@@ -333,7 +388,7 @@
 ---
 
 
-##    *methods*    #<br/>
+## *methods*
 
 - *get_method_id*
     
@@ -424,7 +479,7 @@
 
 ---
 
-##    *utils*    #<br/>
+## *basic utils*
 
 - *get_properties*
     
@@ -493,5 +548,108 @@
 ---
 
 - *get_caller_context*
+    
+    ```Get all caller method ids from n-hop neighborhood for a particular method.```
+
+    Parameters:
+    * method_id: (str) - method_id for which callers are to be determined
+    * n_neighborhood: (int) - size of n-hop neighborhood callers that are to be considered
+    * df: (pandas Dataframe) - pandas Dataframe containing the caller-callee data for the project
+
+    Returns:
+    * Returns a (List[str]) of caller method ids 
+    * Returns an empty List if no callers could be found for method_id
+    * Returns an empty List if n_neighborhood is 0    
+    
+
+---
 
 - *get_callee_context*
+    
+    ```Get all callee method ids from n-hop neighborhood for a particular method.```
+
+    Parameters:
+    * method_id: (str) - method_id for which callees are to be determined
+    * n_neighborhood: (int) - size of n-hop neighborhood callees that are to be considered
+    * df: (pandas Dataframe) - pandas Dataframe containing the caller-callee data for the project
+
+    Returns:
+    * Returns a (List[str]) of callee method ids 
+    * Returns an empty List if no callees could be found for method_id
+    * Returns an empty List if n_neighborhood is 0    
+    
+---
+
+## *task utils*    #<br/>
+
+- *gen_TKNA_from_method_text*
+    
+    ```Process the method text of a method and returns the TKNA representation.```
+
+    Parameters:
+    * method_id: (str) - method_id for which TKNA representation is to be generated
+    * method_text: (str) - corresponding method_text for the method_id 
+
+    Returns:
+    * Returns the TKNA representation of a method
+    
+---
+
+- *gen_TKNB_from_method_text*
+    
+    ```Process the method text of a method and returns the TKNB representation.```
+
+    Parameters:
+    * method_id: (str) - method_id for which TKNB representation is to be generated
+    * method_text: (str) - corresponding method_text for the method_id 
+
+    Returns:
+    * Returns the TKNB representation of a method
+    
+---
+
+- *gen_C2VC_from_method_text*
+    
+    ```Process the method text of a method and returns the C2VC representation.```
+
+    Parameters:
+    * method_id: (str) - method_id for which C2VC representation is to be generated
+    * method_text: (str) - corresponding method_text for the method_id 
+
+    Returns:
+    * Returns the C2VC representation of a method
+    
+
+---
+
+- *gen_C2SQ_from_method_text*
+    
+    ```Process the method text of a method and returns the C2SQ representation.```
+
+    Parameters:
+    * method_id: (str) - method_id for which C2SQ representation is to be generated
+    * method_text: (str) - corresponding method_text for the method_id 
+
+    Returns:
+    * Returns the C2SQ representation of a method
+    
+
+---
+
+- *gen_FTGR_from_method_text*
+    
+    ```Process the method text of a method and returns the FTGR representation.```
+
+    Parameters:
+    * method_id: (str) - method_id for which FTGR representation is to be generated
+    * method_text: (str) - corresponding method_text for the method_id 
+
+    Returns:
+    * Returns the FTGR representation of a method
+    
+---
+
+
+- *gen_representation*
+
+---

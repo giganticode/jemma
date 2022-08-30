@@ -8,6 +8,151 @@ license: MIT
 import sys
 import uuid
 import pandas as pd 
+import jemma_helpers as jh
+
+'''
+# ----------------------
+#  NOTE: Available dicts
+# ----------------------
+# keywords          = {}
+# operators         = {}
+# symbols           = {}
+# literal_keywords  = {}
+# ----------------------
+
+'''
+
+keywords = {
+    'ABSTRACT':     'abstract',
+    'ASSERT':       'assert',
+    'BOOLEAN':      'boolean',
+    'BREAK':        'break',
+    'BYTE':         'byte',
+    'CASE':         'case',
+    'CATCH':        'catch',
+    'CHAR':         'char',
+    'CLASS':        'class', 
+    'CONST':        'const',
+    'CONTINUE':     'continue',
+
+    'DEFAULT':      'default',
+    'DO':           'do',
+    'DOUBLE':       'double',
+    'ELSE':         'else',
+    'ENUM':         'enum',
+    'EXTENDS':      'extends',
+    'FINAL':        'final',
+    'FINALLY':      'finally',
+    'FLOAT':        'float',
+    'FOR':          'for',
+    'GOTO':         'goto',
+
+    'IF':           'if',
+    'IMPLEMENTS':   'implements',
+    'IMPORT':       'import',
+    'INSTANCEOF':   'instanceof',
+    'INT':          'int',
+    'INTERFACE':    'interface',
+
+    'LONG':         'long',
+    'NATIVE':       'native',
+    'NEW':          'new',
+    'PACKAGE':      'package', 
+    'PRIVATE':      'private',
+    'PROTECTED':    'protected',
+    'PUBLIC':       'public',
+    'RETURN':       'return',
+
+    'SHORT':        'short',
+    'STATIC':       'static',
+    'STRICTFP':     'strictfp',
+    'SUPER':        'super',
+    'SWITCH':       'switch',
+    'SYNCHRONIZED': 'synchronized',
+
+    'THIS':         'this',
+    'THROW':        'throw',
+    'THROWS':       'throws',
+    'TRANSIENT':    'transient',
+    'TRY':          'try',
+    'VOID':         'void',
+    'VOLATILE':     'volatile',
+    'WHILE':        'while',
+
+    # 'UNDERSCORE':   '_',          # EXCLUDED! not sure if the grammar supports it
+    # 'NONSEALED':    'non-sealed', # EXCLUDED! not sure if the grammar supports it
+    #  ------------   ------------  # EXCLUDED! String is not a Java keyword, String is a class
+}
+
+literal_keywords = {
+    'TRUE':     'true',
+    'FALSE':    'false',
+    'NULL':     'null',
+}
+
+operators = {
+    'PLUS':     '+',
+    'SUB':      '-',
+    'STAR':     '*',
+    'SLASH':    '/',
+    'PERCENT':  '%',
+    'AMP':      '&',
+    'BAR':      '|',
+    'CARET':    '^',
+    'BANG':     '!',
+    'EQ':       '=',
+    
+    'PLUSEQ':   '+=',
+    'SUBEQ':    '-=',
+    'STAREQ':   '*=',
+    'SLASHEQ':  '/=',
+    'PERCENTEQ':'%=',
+    'AMPEQ':    '&=',
+    'BAREQ':    '|=',
+    'CARETEQ':  '^=',
+    'BANGEQ':   '!=',
+    'EQEQ':     '==',
+
+    'LT':       '<',
+    'GT':       '>',
+    'LTEQ':     '<=',
+    'GTEQ':     '>=',
+    'LTLT':     '<<',
+    'GTGT':     '>>',
+    'GTGTGT':   '>>>',
+    'LTLTEQ':   '<<=',
+    'GTGTEQ':   '>>=',
+    'GTGTGTEQ': '>>>=',
+
+    'PLUSPLUS': '++',
+    'SUBSUB':   '--',
+    'AMPAMP':   '&&',
+    'BARBAR':   '||',        
+
+    'QUES':     '?',
+    'COLON':    ':',   
+    'TILDE':    '~',
+    'ARROW':    '->',   
+
+    'INSTANCEOF':'instanceof',
+    'COLONCOLON':'::', 
+
+}
+
+symbols = {
+    'DOT':      '.',
+    'COMMA':    ',',
+    'SEMI':     ';',    
+    'LPAREN':   '(',
+    'RPAREN':   ')',
+    'LBRACE':   '{',
+    'RBRACE':   '}',
+    'LBRACKET': '[',
+    'RBRACKET': ']',
+
+    'MONKEYS_AT':'@',
+    'ELLIPSIS':  '...', 
+}
 
 
 projects_csv = "./jemma_datasets/metatdata/Jemma_Metadata_Projects.csv"
@@ -16,19 +161,42 @@ classes_csv  = "./jemma_datasets/metatdata/Jemma_Metadata_Classes.csv"
 methods_csv  = "./jemma_datasets/metatdata/Jemma_Metadata_Methods.csv"
 
 properties = { 
+    "RSLK": "./jemma_datasets/properties/Jemma_Properties_Methods_RSLK.csv",
+    "NLDF": "./jemma_datasets/properties/Jemma_Properties_Methods_NLDF.csv",
+    "NMLC": "./jemma_datasets/properties/Jemma_Properties_Methods_NMLC.csv",
+    "NMNC": "./jemma_datasets/properties/Jemma_Properties_Methods_NMNC.csv",
+    "NUCC": "./jemma_datasets/properties/Jemma_Properties_Methods_NUCC.csv",
+    "NUPC": "./jemma_datasets/properties/Jemma_Properties_Methods_NUPC.csv",
     "CMPX": "./jemma_datasets/properties/Jemma_Properties_Methods_CMPX.csv",
-    "SLOC": "./jemma_datasets/properties/Jemma_Properties_Methods_SLOC.csv",
     "MXIN": "./jemma_datasets/properties/Jemma_Properties_Methods_MXIN.csv",
+    "NAME": "./jemma_datasets/properties/Jemma_Properties_Methods_NAME.csv",
+    "NMLT": "./jemma_datasets/properties/Jemma_Properties_Methods_NMLT.csv",
+    "NMOP": "./jemma_datasets/properties/Jemma_Properties_Methods_NMOP.csv",
+    "NMPR": "./jemma_datasets/properties/Jemma_Properties_Methods_NMPR.csv",
+    "NMRT": "./jemma_datasets/properties/Jemma_Properties_Methods_NMRT.csv",
+    "NMTK": "./jemma_datasets/properties/Jemma_Properties_Methods_NMTK.csv",
+    "NTID": "./jemma_datasets/properties/Jemma_Properties_Methods_NTID.csv",
+    "NUID": "./jemma_datasets/properties/Jemma_Properties_Methods_NUID.csv",
+    "SLOC": "./jemma_datasets/properties/Jemma_Properties_Methods_SLOC.csv",
+    "TLOC": "./jemma_datasets/properties/Jemma_Properties_Methods_TLOC.csv",    
 }
 
 representations = {
-    "TEXT": "./data/Giganticode_50PLUS_DB_representations_TEXT_CENTOS.csv",
-    "TOKN": "./data/Giganticode_50PLUS_DB_representations_TOKN_CENTOS.csv",
-    "C2VC": "./data/Giganticode_50PLUS_DB_representations_C2VC_CENTOS.csv",
-    "C2SQ": "./data/Giganticode_50PLUS_DB_representations_C2SQ_CENTOS.csv",
+    "TEXT": "./jemma_datasets/representations/Jemma_Representations_Methods_TEXT.csv",
+    "TKNA": "./jemma_datasets/representations/Jemma_Representations_Methods_TKNA.csv",
+    "TKNB": "./jemma_datasets/representations/Jemma_Representations_Methods_TKNB.csv",    
+    "C2VC": "./jemma_datasets/representations/Jemma_Representations_Methods_C2VC.csv",
+    "C2SQ": "./jemma_datasets/representations/Jemma_Representations_Methods_C2SQ.csv",
+    "FTGR": "./jemma_datasets/representations/Jemma_Representations_Methods_FTGR.csv"
 }
 
 properties_label = {
+    "RSLK": "resource_leak",
+    "NLDF": "null_dereference",
+    "NMLC": "num_local_calls",
+    "NMNC": "num_non_local_calls",
+    "NUCC": "num_unique_callees",
+    "NUPC": "num_unique_callers",
     "CMPX": "cyclomatic_complexity",
     "MXIN": "max_indent",
     "NAME": "method_name",
@@ -591,6 +759,10 @@ def get_method_metadata(method_id):
     return None    
 
 
+def get_stps_enps(method_id):
+    pass
+
+
 
 # *************** #
 #      utils      #
@@ -704,13 +876,71 @@ def get_callers(method_id):
     return list(set(callers))
 
 
+def get_caller_context(method_id, n_neighborhood, df):    
+    """
+    Get all caller method ids from n-hop neighborhood for a particular method.
 
-def get_caller_context(method_id, n_neighborhood):
-    pass 
+    Parameters:
+    * method_id: (str) - method_id for which callers are to be determined
+    * n_neighborhood: (int) - size of n-hop neighborhood callers that are to be considered
+    * df: (pandas Dataframe) - pandas Dataframe containing the caller-callee data for the project
 
-def get_callee_context(method_id, n_neighborhood):
-    pass
+    Returns:
+    * Returns a (List[str]) of caller method ids 
+    * Returns an empty List if no callers could be found for method_id
+    * Returns an empty List if n_neighborhood is 0    
+    """
+    if n_neighborhood == 0:
+        return []
 
+    return_val = []
+    df = df[df["callee_method_id"] == method_id]
+    callers = df["caller_method_id"].tolist()
+    callers = [item for item in callers if jh.is_valid(item)]
+    callers = list(set(callers))    
+
+    if method_id in callers: 
+        callers = list(filter(lambda x: x != method_id, callers))    
+
+    return_val.extend(callers)
+    n_size = n_size - 1
+    for caller in callers:
+        return_val.extend(get_caller_context(caller, n_size, df))
+          
+    return return_val
+
+def get_callee_context(method_id, n_neighborhood, df):
+    """
+    Get all callee method ids from n-hop neighborhood for a particular method.
+
+    Parameters:
+    * method_id: (str) - method_id for which callees are to be determined
+    * n_neighborhood: (int) - size of n-hop neighborhood callees that are to be considered
+    * df: (pandas Dataframe) - pandas Dataframe containing the caller-callee data for the project
+
+    Returns:
+    * Returns a (List[str]) of callee method ids 
+    * Returns an empty List if no callees could be found for method_id
+    * Returns an empty List if n_neighborhood is 0    
+    """
+    if n_neighborhood == 0:
+        return []
+
+    return_val = []
+    df = df[df["caller_method_id"] == method_id]
+    callees = df["callee_method_id"].tolist()
+    callees = [item for item in callees if jh.is_valid(item)]
+    callees = list(set(callees))    
+
+    if method_id in callees: 
+        callees = list(filter(lambda x: x != method_id, callees))    
+
+    return_val.extend(callees)
+    n_size = n_size - 1
+    for callee in callees:
+        return_val.extend(get_caller_context(callee, n_size, df))
+          
+    return return_val
 
 
 # ************************************************************************************
@@ -721,6 +951,25 @@ def get_callee_context(method_id, n_neighborhood):
 #         return True
 #     except ValueError:
 #         return False    
+
+# def get_caller_methods(pid, methods_list, n_size, df):
+#     if n_size == 0 or len(methods_list) == 0:
+#         return []
+
+#     return_val = []
+#     for mid in methods_list: 
+#         df = df[df["callee_method_id"] == mid]
+#         callers = df["caller_method_id"].tolist()
+#         callers = [item for item in callers if is_valid(item)]
+#         callers = list(set(callers))
+
+#         if mid in callers: 
+#             callers = list(filter(lambda x: x != mid, callers))
+#         #print(f"For mid: {mid} the callers are: {callers}")
+
+#         n_size = n_size - 1
+#         return_val.append([callers, get_caller_methods(pid, callers, n_size, df)])
+#     return return_val
 
 # def get_caller_methods(pid, methods_list, n_size, df):
 #     if n_size == 0 or len(methods_list) == 0:
