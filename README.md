@@ -6,8 +6,8 @@
 #### Contents
 
 
-- [Setup Instructions](####Setup-Instructions)
-- [Getting to know JEMMA Datasets](###Getting-to-know-JEMMA-Datasets)
+- [Setup Instructions](####setup-instructions)
+- [Getting to know JEMMA Datasets](###getting-to-know-jemma-datasets)
     - JEMMA Metadata
     - JEMMA Representations
     - JEMMA Properties
