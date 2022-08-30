@@ -14,7 +14,7 @@
     - JEMMA Callgraphs
 
 - Working with JEMMA Workbench
-    - List of API Calls
+    - [List of API Calls](#list-of-api-calls)
         - [projects](#projects)
         - [classes](#classes)
         - [methods](#methods) 
@@ -67,7 +67,7 @@ Property Name --- Property Code --- Link to dataset
 
 
 
-#### List of JEMMA API calls
+#### List of API calls
 ---
 
 
