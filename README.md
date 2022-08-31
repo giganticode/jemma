@@ -8,19 +8,19 @@
 
 - [Setup Instructions](#setup-instructions)
 - [Getting to know JEMMA Datasets](#getting-to-know-jemma-datasets)
-    - JEMMA Metadata
-    - JEMMA Representations
-    - JEMMA Properties
-    - JEMMA Callgraphs
+    - [JEMMA Metadata](#jemma-metadata)
+    - [JEMMA Representations](#jemma-representations)
+    - [JEMMA Properties](#jemma-properties)
+    - [JEMMA Callgraphs](#jemma-callgraphs)
 
-- Working with JEMMA Workbench
+- [Working with JEMMA Workbench](#working-with-jemma-workbench)
     - [List of API Calls](#list-of-api-calls)
-        - [projects](#projects)
-        - [classes](#classes)
-        - [methods](#methods) 
+        - [projects](#projects)       
+        - [classes](#classes)         
+        - [methods](#methods)         
         - [basic utils](#basic-utils) 
-        - [task utils](#task-utils)
-    - Use-Case Tutorials
+        - [task utils](#task-utils)   
+    - [Use-Case Tutorials](#use-case-tutorials)
 
 
 ---
@@ -32,6 +32,8 @@
 Getting started with jemma
 
 
+
+
 ---
 
 
@@ -39,33 +41,123 @@ Getting started with jemma
 
 #### JEMMA Metadata
 
+| Link to metadata     | columns      |
+|:---------|:----------   |
+| [*projects*](https://doi.org/10.5281/zenodo.5807578/) | *project_id* |
+|  | *project_path* |
+|  | *project_name* |
+|  |  ||
+| [*packages*](https://doi.org/10.5281/zenodo.5807586/) | *project_id* | 
+|  | *package_id*   |
+|  | *package_path* | 
+|  | *package_name* |
+|  |  ||
+| [*classes*](https://doi.org/10.5281/zenodo.5808902/) | *project_id* |
+|  | *package_id* |
+|  | *class_id*   |
+|  | *class_path* |
+|  | *class_name* |
+|  |  ||
+| [*methods*](https://doi.org/10.5281/zenodo.5813089/) | *project_id* |
+|  | *package_id*  |
+|  | *class_id*    |
+|  | *method_id*   |
+|  | *method_name* |
+|  | *start_line*  |
+|  | *end_line*    |
+
+
 ---
 
 #### JEMMA Representations
 
-Table 
+| Representation Code           | Representation Name   | Link to dataset   |
+|:------------------------------|:----------------------|:------------------|
+| TEXT                          | raw_source_code       | https://doi.org/10.5281/zenodo.5813705 |
+| TKNA                          | code_tokens (spaced)  | https://doi.org/10.5281/zenodo.5813717 |
+| TKNB                          | code_tokens (comma)   | https://doi.org/10.5281/zenodo.5813730 |   
+| C2VC                          | code2vec*              | https://doi.org/10.5281/zenodo.5813993 |
+| C2SQ                          | code2seq*              | https://doi.org/10.5281/zenodo.5814059 |
+| FTGR                          | feature_graph*         | https://doi.org/10.5281/zenodo.5813933 |
 
-Representation Name --- Representation Code --- Link to dataset
+
 
 
 ---
 
 #### JEMMA Properties
 
-Table 
+| Property Code $~~~~~~~~~$     | Property Name $~~~~~~~~~$        | Link to dataset   |
+|:------------------------------|:---------------------------------|:------------------|
+| RSLK                          | resource_leak | https://doi.org/10.5281/zenodo.1096082 |
+| NLDF                          | null_dereference | https://doi.org/10.5281/zenodo.1096080 |
+| NMLC                          | num_local_calls | https://doi.org/10.5281/zenodo.7020084 |
+| NMNC                          | num_non_local_calls | https://doi.org/10.5281/zenodo.7019960 |
+| NUCC                          | num_unique_callees | https://doi.org/10.5281/zenodo.7019176 |
+| NUPC                          | num_unique_callers | https://doi.org/10.5281/zenodo.7019128 |
+| CMPX                          | cyclomatic_complexity | https://doi.org/10.5281/zenodo.5813084 |
+| MXIN                          | max_indent | https://doi.org/10.5281/zenodo.5813081 |
+| NAME                          | method_name | https://doi.org/10.5281/zenodo.5813308 |
+| NMLT                          | num_literals | https://doi.org/10.5281/zenodo.5813054 |
+| NMOP                          | num_operators |https://doi.org/10.5281/zenodo.5813055 |
+| NMPR                          | num_parameters | https://doi.org/10.5281/zenodo.5813053 |
+| NMRT                          | num_returns | https://doi.org/10.5281/zenodo.5813034 |
+| NMTK                          | num_tokens | https://doi.org/10.5281/zenodo.5813032 |
+| NTID                          | num_identifiers | https://doi.org/10.5281/zenodo.5813029 |
+| NUID                          | num_unique_identifiers | https://doi.org/10.5281/zenodo.5813028 |
+| SLOC                          | source_lines_of_code | https://doi.org/10.5281/zenodo.5813094 |
+| TLOC                          | total_lines_of_code | https://doi.org/10.5281/zenodo.5813102 |    
 
-Property Name --- Property Code --- Link to dataset
+
+
+<!-- \textit{Properties:} \texttt{[TLOC]}  & \url{} & 335.5 MB\Tstrut{}\\
+\textit{Properties:} \texttt{[SLOC]}  & \url{} & 335.0 MB  \\
+
+\textit{Properties:} \texttt{[NUID]}  & \url{} & 335.6 MB  \\
+\textit{Properties:} \texttt{[NTID]}  & \url{} & 336.7 MB  \\ 
+\textit{Properties:} \texttt{[NMTK]}  & \url{} & 342.5 MB  \\
+\textit{Properties:} \texttt{[NMRT]}  & \url{} & 333.3 MB  \\
+\textit{Properties:} \texttt{[NMPR]}  & \url{} & 333.3 MB  \\
+\textit{Properties:} \texttt{[NMOP]}  & \url{} & 334.5 MB  \\ 
+\textit{Properties:} \texttt{[NMLT]}  & \url{} & 333.4 MB  \\
+\textit{Properties:} \texttt{[NAME]}  & \url{} & 432.0 MB  \\
+\textit{Properties:} \texttt{[MXIN]}  & \url{} & 267.0 MB  \\
+\textit{Properties:} \texttt{[CMPX]}  & \url{} & 267.1 MB\Bstrut{}\\ 
+
+
+\textit{Properties:} \texttt{[NUPC]}  & \url{} & 333.3 MB  \\
+\textit{Properties:} \texttt{[NUCC]}  & \url{} & 333.6 MB  \\
+
+\textit{Properties:} \texttt{[NMNC]}  & \url{} & 334.0 MB  \\
+\textit{Properties:} \texttt{[NMLC]}  & \url{} & 333.2 MB  \\
+
+
+% \textit{Properties:} \texttt{[NMTC]}  & \url{https://doi.org/10.5281/zenodo.7019246} & 334.0 MB\Bstrut{}\\ 
+
+
+\textit{Properties:} \texttt{[NLDF]}  & \url{} & 333.6 MB  \\
+\textit{Properties:} \texttt{[RSLK]}  & \url{} & 334.0 MB\Bstrut{}\\  -->
+
 
 ---
 
 #### JEMMA Callgraphs
 
+| Link to callgraphs data | columns |
+|:----------------------- |:------- |
+| [Callgraphs](https://doi.org/10.5281/zenodo.6758937) | *caller_project_id* |
+| | *caller_class_id* |
+| | *caller_method_id* |
+| | *call_direction* |
+| | *callee_project_id* |
+| | *callee_class_id* |
+| | *callee_method_id* |
+| | *call_type* |
+
 
 ---
 
 ### Working with JEMMA Workbench
-
-
 
 #### List of API calls
 ---
@@ -301,7 +393,7 @@ Property Name --- Property Code --- Link to dataset
     Returns:
     * Returns a str uuid of the corresponding class (class_id)
     * Returns None if no such class_id was found
-    """
+    
 
 ---
 
@@ -654,3 +746,6 @@ Property Name --- Property Code --- Link to dataset
 - *gen_representation*
 
 ---
+
+
+#### Use-Case Tutorials
