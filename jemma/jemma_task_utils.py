@@ -692,6 +692,14 @@ def get_metrics(metric, method_ids):
 
 def get_properties(property, method_ids):
     """
+    Get property values for a list of methods.
+
+    Parameters:
+    * property : (str) - property code
+    * methods : (list[str]) - list of unique methods ids
+
+    Returns:
+    * pandas Dataframe object (with method_id, property) of the passed list of methods
     """
     mt = sys.path[0] + "/jemma_datasets/properties/Jemma_Properties_Methods_" + property + ".csv"
     df = pd.read_csv(mt, header=0)
@@ -768,14 +776,25 @@ def run_model(df_train, df_test, train_model_name, label_head, reprs_head):
         return ""    
 
 
-def run_models(metric, representation, train_methods, test_methods, models):
+def run_models(property, representation, train_methods, test_methods, models):
     """
+    Trains/finetunes a set of models for a given task and representation, from the specified data
+
+    Parameters:
+    * property: (str) - property (code) which is to be used 
+    * representation: (str) - representation (code) which is to be used 
+    * train_methods: (List[str]) - list of methods (method_ids) to be considered as training samples
+    * test_methods: (List[str]) - list of methods (method_ids) to be considered as test samples
+    * models: (List[str]) - List of models (huggingface paths or codes) to train and evaluate
+
+    Returns:
+    * None: Prints the evaluation scores for each model
     """
     method_ids = train_methods + test_methods
     label_head = metric_headers.get(metric, "NOT FOUND")
     reprs_head = representation_headers.get(representation, "NOT FOUND")
 
-    dm = get_metrics(metric, method_ids)
+    dm = get_properties(property, method_ids)
     dr = get_representations(representation, method_ids)
 
     df = pd.merge(dr, dm, on="method_id")
@@ -793,7 +812,6 @@ def run_models(metric, representation, train_methods, test_methods, models):
 
 
 # if __name__ == "__main__":
-    
 #     dfm = pd.read_csv(sys.path[0]+"/jemma_datasets/properties/Jemma_Properties_Methods_CMPX.csv", header=0)
 #     dfm = dfm[dfm["cyclomatic_complexity"] < 5]
 

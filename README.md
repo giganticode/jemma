@@ -762,8 +762,46 @@
 
 
 - *gen_representation*
+    
+    ```Process the method text of a method and returns the selected representation.```
 
+    Parameters:
+    * representation: (str) - representation (code) which is to be generated
+    * method_id: (str) - method_id for which the representation is to be generated
+    * method_text: (str) - corresponding method_text for the method 
+
+    Returns:
+    * Returns the selected representation for the method
+    
 ---
 
+- *get_properties*
+    
+    ```Get property values for a list of methods.```
+
+    Parameters:
+    * property : (str) - property code
+    * methods : (list[str]) - list of unique methods ids
+
+    Returns:
+    * pandas Dataframe object (with method_id, property) of the passed list of methods
+    
+---
+
+- *run_models*
+    
+    ```Trains/finetunes a set of models for a given task and representation, from the specified data```
+
+    Parameters:
+    * property: (str) - property (code) which is to be used 
+    * representation: (str) - representation (code) which is to be used 
+    * train_methods: (List[str]) - list of methods (method_ids) to be considered as training samples
+    * test_methods: (List[str]) - list of methods (method_ids) to be considered as test samples
+    * models: (List[str]) - List of models (huggingface paths or codes) to train and evaluate
+
+    Returns:
+    * None: Prints the evaluation scores for each model
+    
+---
 
 #### Use-Case Tutorials
