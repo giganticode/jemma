@@ -27,10 +27,28 @@
 
 <a id="setup-instructions"></a>
 
-#### Setup Instructions
+#### Setup Instructions 
 
-Getting started with jemma
+<!-- > Getting started with jemma -->
 
+
+> First steps: Install jemma locally
+```
+1. $ git clone https://github.com/giganticode/jemma.git 
+2. $ cd jemma/ 
+3. $ pip install -r requirements.txt
+4. $ pip install -e .
+```
+
+> Next steps: Downloading all the datasets <br>
+> Sign-up to Zenodo.org and generate an API num_token [IMPORTANT!]
+
+```
+5. $ cd jemma/download/ 
+6. $ nano config.ini (& replace the dummy `access_token` with your API key)
+7. $ python3 download.py 
+8. $ python3 sanity_checks.py
+```
 
 
 
@@ -152,7 +170,7 @@ Getting started with jemma
 | | *callee_project_id* |
 | | *callee_class_id* |
 | | *callee_method_id* |
-| | *call_type* |
+<!-- | | *call_type* | -->
 
 
 ---
