@@ -42,7 +42,6 @@ callgraphs = {
 }
 
 
-
 ERROR = "\x1b[6;30;41m  ERROR  \x1b[0m"
 dst_base = sys.path[0] + "/../jemma_datasets/"
 dst_dats = ["metadata", "properties", "representations", "callgraphs"]
