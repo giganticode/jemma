@@ -1,4 +1,4 @@
-## JEMMA
+<!-- README -->
 
 ![](./assets/img/jemma-cover-main.png)
 
