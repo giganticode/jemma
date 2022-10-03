@@ -5,9 +5,8 @@
 
 #### This is the official documentation for the JEMMA project
 
-JEMMA is an Extensible Java dataset for Many ML4Code Applications. <br>
-It comes with a Workbench that helps users interact and work with the data seamlessly. 
-This repository hosts the Workbench part of JEMMA, while the data is hosted on Zenodo. The following sections provide more details.   
+JEMMA is an Extensible Java dataset for Many ML4Code Applications. It is primarily a dataset of Java code entities, their properties, and representations. 
+To help users interact and work with the data seamlessly, we have added Workbench capabilities to it as well. This repository hosts the Workbench part of JEMMA, while the raw data is hosted on Zenodo which can be downloaded at any moment while using the Workbench. The following sections provide more details.   
 
 
 #### Contents
