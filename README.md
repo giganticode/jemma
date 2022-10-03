@@ -3,6 +3,8 @@
 
 #### This is the official documentation for the JEMMA project
 
+![](./assets/img/jemma-cover-base.png)
+
 #### Contents
 
 
