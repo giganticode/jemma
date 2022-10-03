@@ -1,6 +1,6 @@
 ## JEMMA
 
-![](./assets/img/jemma-cover-base.png)
+![](./assets/img/jemma-cover-main.png)
 
 
 #### This is the official documentation for the JEMMA project
