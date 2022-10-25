@@ -813,3 +813,12 @@ This repository hosts the Workbench part of JEMMA, while the raw data is hosted 
 ---
 
 #### Use-Case Tutorials [COMING SOON]
+
+
+---
+
+#### When you encounter issues
+
+This alpha release of JEMMA. We have tested it with several use cases. However, there might still be bugs in the implementation that we hope to iron out in the next few months.
+
+If you encounter any of these bugs, please open a respective GitHub Issue!
