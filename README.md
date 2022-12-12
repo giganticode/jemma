@@ -28,7 +28,7 @@ This repository hosts the Workbench part of JEMMA, while the raw data is hosted 
         - [methods](#methods)         
         - [basic utils](#basic-utils) 
         - [task utils](#task-utils)   
-    - [Use-Case Tutorials](#use-case-tutorials)
+    - [Use Case Tutorials](#use-case-tutorials)
     
 - [Submitting *Pull Requests* with new data](#submitting-pull-requests)
 
@@ -701,7 +701,7 @@ This repository hosts the Workbench part of JEMMA, while the raw data is hosted 
     
 ---
 
-## *task utils*    #<br/>
+## *task utils*   
 
 - *gen_TKNA_from_method_text*
     
@@ -814,7 +814,9 @@ This repository hosts the Workbench part of JEMMA, while the raw data is hosted 
     
 ---
 
-#### Use-Case Tutorials [COMING SOON]
+#### Use Case Tutorials 
+
+[COMING SOON]
 
 
 ---
