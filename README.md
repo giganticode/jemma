@@ -29,6 +29,8 @@ This repository hosts the Workbench part of JEMMA, while the raw data is hosted 
         - [basic utils](#basic-utils) 
         - [task utils](#task-utils)   
     - [Use-Case Tutorials](#use-case-tutorials)
+    
+- [Submitting PR with new data](#submitting-pull-requests)
 
 
 ---
@@ -819,6 +821,29 @@ This repository hosts the Workbench part of JEMMA, while the raw data is hosted 
 
 #### When you encounter issues
 
-This alpha release of JEMMA. We have tested it with several use cases. However, there might still be bugs in the implementation that we hope to iron out in the next few months.
+This is the alpha release of JEMMA. We have tested it with several use cases. 
+However, there might still be bugs in the implementation that we hope to iron out in the next few months.
 
 If you encounter any of these bugs, please open a respective GitHub Issue!
+
+---
+
+### Submitting Pull Requests
+
+In order to contribute new data to the JEMMA Datasets, users must fork this repository and clone it locally. Once JEMMA is cloned locally, users can run the processing scripts on local projects, which will generate a set of csv files: metadata, representations, properties, call-graphs---which is the *new data*. 
+
+The freshly generated csvs are to be included in the next commit. It is advised that users review the data before committing. 
+Users can then push the changes to their fork of the JEMMA repository, and submit a new *pull request* for the data files which were generated. 
+
+Once a *pull request* (data contribution) is submitted, the generated data will be validated for errors and inconsistencies, and then integrated into our original dataset if approved. The new dataset will be subsequently updated on zenodo, which lets us host multiple versions.
+
+Here's the step-by-step procedure for submitting a *pull request* to JEMMA: 
+1. Fork the JEMMA repository
+2. Clone the JEMMA repository to your local workspace 
+3. Create a *new* branch 
+4. Make your changes (run the processing scripts)
+5. Commit the changes (new files generated)
+6. Push the changes to your JEMMA fork 
+7. Create a *pull request* on Github
+
+---
